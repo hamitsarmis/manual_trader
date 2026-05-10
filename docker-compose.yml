@@ -1,0 +1,26 @@
+services:
+  manual_trader:
+    image: freqtradeorg/freqtrade:stable
+    container_name: manual_trader
+    restart: unless-stopped
+    user: "1000:1000"
+    ports:
+      # Localhost-only by default. Change to "8080:8080" to expose on the LAN.
+      - "127.0.0.1:8080:8080"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Inside the container, bind to all interfaces so the host port-mapping works.
+      # The host side is still locked to 127.0.0.1 above.
+      - FREQTRADE__API_SERVER__LISTEN_IP_ADDRESS=0.0.0.0
+      # Persist the SQLite DB inside the bind-mounted user_data dir.
+      - FREQTRADE__DB_URL=sqlite:////freqtrade/user_data/manual_tradingview.db?check_same_thread=False&timeout=30
+    volumes:
+      - ./config.json:/freqtrade/config.json:ro
+      - ./pairlist-backtest-static-binance-futures-usdt.json:/freqtrade/pairlist-backtest-static-binance-futures-usdt.json:ro
+      - ./secrets.json:/freqtrade/secrets.json:ro
+      - ./user_data:/freqtrade/user_data
+    command: >
+      trade
+      --config /freqtrade/config.json

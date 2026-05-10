@@ -1,0 +1,55 @@
+{
+  "add_config_files": [
+    "pairlist-backtest-static-binance-futures-usdt.json",
+    "secrets.json"
+  ],
+  "force_entry_enable": true,
+  "bot_name": "ManualBot",
+  "max_open_trades": 2,
+  "allow_multi_entry_in_same_direction": false,
+  "allow_position_stacking": false, 
+  "position_mode": "single",
+  "stake_currency": "USDT",
+  "stake_amount": "unlimited",
+  "process_throttle_secs": 10,
+  "dry_run": true,
+  "loglevel": "DEBUG",
+  "fee": 0.001,
+  "timeframe": "1m",
+  "order_types": {
+    "entry": "market",
+    "exit": "market",
+    "emergency_exit": "market",
+    "force_entry": "market",
+    "force_exit": "market",
+    "stoploss": "market",
+    "stoploss_on_exchange": false,
+    "stoploss_on_exchange_interval": 60,
+    "stoploss_on_exchange_limit_ratio": 0.141
+  },
+  "strategy": "ManualStrategy",
+  "include_corr_pairlist": false,
+  "initial_state": "running",
+  "dataformat_ohlcv": "json",
+  "api_server": {
+    "enabled": true,
+    "listen_ip_address": "127.0.0.1",
+    "listen_port": 8080,
+    "verbosity": "info",
+    "enable_openapi": true,
+    "CORS_origins": [ "http://127.0.0.1:8081" ]
+  },
+  "db_url": "sqlite:///manual_tradingview.db?check_same_thread=False&timeout=30",
+  "database": {
+    "max_connections": 2,
+    "pool_size": 5,
+    "max_overflow": 0
+  },
+  "telegram": {
+    "enabled": false,
+    "token": "0",
+    "chat_id": "0"
+  },
+  "trading_mode": "futures",
+  "margin_mode": "isolated"
+}
