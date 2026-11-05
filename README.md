@@ -113,7 +113,8 @@ With the bot running, use the API to force a long or short:
 
 ```bash
 # Force a long entry on BTC/USDT:USDT
-curl -u freqtrader:YOUR_PASSWORD \
+# password = FREQTRADE__API_SERVER__PASSWORD from your .env; curl prompts for it
+curl -u freqtrader \
   -X POST http://127.0.0.1:8080/api/v1/forceenter \
   -H 'Content-Type: application/json' \
   -d '{"pair": "BTC/USDT:USDT", "side": "long"}'
